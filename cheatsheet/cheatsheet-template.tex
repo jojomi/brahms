@@ -1,0 +1,101 @@
+\documentclass{article}
+
+\usepackage{xpiano}
+\usepackage{multicol}
+
+\begin{document}
+
+{{ range . }}
+
+\section*{ {{- .Name }} %
+{{ .Flats }}{{ .Sharps }}}
+
+\begin{multicols}{2}
+\subsection*{Tonleiter}
+
+\keyboard[{{ .NoteStyle }}]{ {{- .Notes -}} }
+
+
+\subsection*{Hauptakkorde}
+
+\begin{itemize}
+\item \textbf{Tonika} {{ .Tonika.Name -}}: 
+
+\keyboard[{{ .NoteStyle }}]{ {{- .Tonika.Notes -}} }
+
+\item \textbf{Subdominante} {{ .Subdominant.Name -}}:
+
+\keyboard[{{ .NoteStyle }}]{ {{- .Subdominant.Notes -}} }
+
+\item \textbf{Dominante} {{ .Dominant.Name -}}:
+
+\keyboard[{{ .NoteStyle }}]{ {{- .Dominant.Notes -}} }
+\end{itemize}
+
+
+\subsection*{Nebenakkorde}
+
+\begin{itemize}
+\item \textbf{Dominantsept} {{ .Dominantsept.Name -}}: 
+
+\keyboard[{{ .NoteStyle }}]{ {{- .Dominantsept.Notes -}} }
+
+\item \textbf{Tonikaparallele} {{ .Tonikaparallel.Name -}}:
+
+\keyboard[{{ .NoteStyle }}]{ {{- .Tonikaparallel.Notes -}} }
+
+\item \textbf{Subdominantparallele} {{ .Subdominantparallel.Name -}}: 
+
+\keyboard[{{ .NoteStyle }}]{ {{- .Subdominantparallel.Notes -}} }
+
+\item \textbf{Dominantparallele} {{ .Dominantparallel.Name -}}: 
+
+\keyboard[{{ .NoteStyle }}]{ {{- .Dominantparallel.Notes -}} }
+
+\item \textbf{Verminderter Akkord} {{ .Min.Name -}}: 
+
+\keyboard[{{ .NoteStyle }}]{ {{- .Min.Notes -}} }
+
+\end{itemize}
+
+\columnbreak
+
+\subsection*{Harmonisierung}
+
+\begin{itemize}
+\item[\Large\textbf{ {{- .ScaleNotes.no1 -}} }] \textbf{ {{- .Tonika.Name }} (D)}, \textbf{ {{- .Subdominant.Name }} (S)}, {{ .Tonikaparallel.Name }} (Tp)
+\item[\Large\textbf{ {{- .ScaleNotes.no2 -}} }] \textbf{ {{- .Dominant.Name }} (D)}, {{ .Subdominantparallel.Name }} (Sp), {{ .Dominantsept.Name }} (Ds)
+\item[\Large\textbf{ {{- .ScaleNotes.no3 -}} }] \textbf{ {{- .Tonika.Name }} (T)}, {{ .Dominantparallel.Name }} (Dp), {{ .Tonikaparallel.Name }} (Tp)
+\item[\Large\textbf{ {{- .ScaleNotes.no4 -}} }] \textbf{ {{- .Subdominant.Name }} (S)}, {{ .Subdominantparallel.Name }} (Sp), {{ .Dominantsept.Name }} (Ds)
+\item[\Large\textbf{ {{- .ScaleNotes.no5 -}} }] \textbf{ {{- .Dominant.Name }} (D)}, \textbf{ {{- .Tonika.Name }} (T)}, {{ .Dominantparallel.Name }} (Dp), {{ .Dominantsept.Name }} (Ds)
+\item[\Large\textbf{ {{- .ScaleNotes.no6 -}} }] \textbf{ {{- .Subdominant.Name }} (S)}, {{ .Tonikaparallel.Name }} (Tp), {{ .Subdominantparallel.Name }} (Sp)
+\item[\Large\textbf{ {{- .ScaleNotes.no7 -}} }] \textbf{ {{- .Min.Name }} } (Min), \textbf{ {{- .Dominant.Name -}} } (D), {{ .Dominantsept.Name }} (Ds), {{ .Dominantparallel.Name }} (Dp)
+\end{itemize}
+
+
+\subsection*{Kadenzen}
+
+\begin{itemize}
+\item \textbf{ {{- .Tonika.Name }} {{ .Subdominant.Name }} {{ .Dominant.Name }} {{ .Tonika.Name -}} }: 8-5-3-8
+\end{itemize}
+
+
+\subsection*{Parallel-Tonart}
+
+{{ .ParallelScale }}
+
+
+%\begin{figure}[thpb]\
+%  \centering
+%
+%  \caption{C aug chord}
+%  \label{Chord1}
+%\end{figure}
+
+\end{multicols}
+
+\newpage
+
+{{ end }}
+
+\end{document}
